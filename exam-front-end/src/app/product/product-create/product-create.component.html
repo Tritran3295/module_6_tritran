@@ -1,0 +1,31 @@
+<div class="container w-50 mt-2 p-2" style="border: 1px solid grey; border-radius: 15px">
+  <h3 class="text-center">Add New Product</h3>
+  <form class="row g-3" [formGroup]="productForm" (ngSubmit)="createProduct()">
+    <div class="col-md-12">
+      <label for="name" class="form-label">Name Product</label>
+      <input type="text" class="form-control" id="name" formControlName="name">
+    </div>
+<!--    <div *ngIf="employeeForm.controls.name.hasError('required') &&-->
+<!--          employeeForm.controls.name.touched" class="text-danger">Name not empty-->
+<!--    </div>-->
+
+
+
+    <div class="col-md-12">
+      <label for="price" class="form-label">Price</label>
+      <input type="text" class="form-control" id="price" formControlName="price">
+    </div>
+    <div class="col-md-12">
+      <label class="form-label">Category</label>
+      <select name="category" class="form-select" formControlName="category">
+        <option value="0"  disabled>Vui lòng chọn</option>
+        <option *ngFor="let temp of categoryList" [ngValue]="temp">{{temp.nameCategory}}</option>
+      </select>
+    </div>
+
+    <div class="col-12 ">
+      <button type="submit" class="btn btn-primary me-2" [disabled]="!productForm.valid">Create</button>
+      <button type="button" class="btn btn-success" routerLink="">Back</button>
+    </div>
+  </form>
+</div>

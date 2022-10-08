@@ -1,0 +1,103 @@
+<div class="container w-50 mt-2 p-2" style="border: 1px solid grey; border-radius: 15px">
+  <h3 class="text-center">Edit Product</h3>
+  <form class="row g-3" [formGroup]="benXeForm" (ngSubmit)="editBenXe()">
+    <div class="col-md-12">
+      <label for="soXe" class="form-label" >Số Xe</label>
+      <input type="text" class="form-control" id="soXe" formControlName="soXe" disabled>
+
+    <div class="col-md-12">
+      <label for="loaiXe" class="form-label">Loại Xe<span style="color: red">(*)</span></label>
+      <input type="text" class="form-control" id="loaiXe" formControlName="loaiXe">
+    </div>
+    </div>
+    <div *ngIf="benXeForm.controls.loaiXe.hasError('required') &&
+              benXeForm.controls.loaiXe.touched" class="text-danger">Loại xe không được để trống
+    </div>
+
+    <div class="col-md-12">
+      <label for="tenNhaXe" class="form-label">Tên Nhà Xe<span style="color: red">(*)</span></label>
+      <input type="text" class="form-control" id="tenNhaXe" formControlName="tenNhaXe">
+    </div>
+    <div *ngIf="benXeForm.controls.tenNhaXe.hasError('required') &&
+              benXeForm.controls.tenNhaXe.touched" class="text-danger">Tên nhà xe không được để trống
+    </div>
+
+    <div class="col-md-12">
+      <label class="form-label">Điểm đi<span style="color: red">(*)</span></label>
+      <select name="diemDi" class="form-select" formControlName="diemDi" [compareWith]="compareDiemDi">
+        <option value="0"  disabled>Vui lòng chọn</option>
+        <option *ngFor="let temp of diemDiList" [ngValue]="temp">{{temp.tenDiemDi}}</option>
+      </select>
+    </div>
+    <div *ngIf="benXeForm.controls.diemDi.hasError('required') &&
+              benXeForm.controls.diemDi.touched" class="text-danger">Điểm đi không được để trống
+    </div>
+
+
+    <div class="col-md-12">
+      <label class="form-label">Điểm đến<span style="color: red">(*)</span></label>
+      <select name="diemDen" class="form-select" formControlName="diemDen" [compareWith]="compareDiemDen">
+        <option value="0"  disabled>Vui lòng chọn</option>
+        <option *ngFor="let temp of diemDenList" [ngValue]="temp">{{temp.tenDiemDen}}</option>
+      </select>
+    </div>
+    <div *ngIf="benXeForm.controls.diemDen.hasError('required') &&
+              benXeForm.controls.diemDen.touched" class="text-danger">Điểm đến không được để trống
+    </div>
+
+    <div class="col-md-12">
+      <label for="soDienThoai" class="form-label">Số điện thoại<span style="color: red">(*)</span></label>
+      <input type="text" class="form-control" id="soDienThoai" formControlName="soDienThoai">
+    </div>
+    <div *ngIf="benXeForm.controls.soDienThoai.hasError('required') &&
+              benXeForm.controls.soDienThoai.touched" class="text-danger">Số điện thoại không được để trống
+    </div>
+    <div *ngIf="benXeForm.controls.soDienThoai.hasError('pattern') &&
+              benXeForm.controls.soDienThoai.touched" class="text-danger">SĐT phải đúng định dạng, bắt đầu bằng +090 hặc +093 hoặc +097
+    </div>
+
+    <div class="col-md-12">
+      <label for="email" class="form-label">Email<span style="color: red">(*)</span></label>
+      <input type="text" class="form-control" id="email" formControlName="email">
+    </div>
+    <div *ngIf="benXeForm.controls.email.hasError('required') &&
+              benXeForm.controls.email.touched" class="text-danger">Email không được để trống
+    </div>
+    <div *ngIf="benXeForm.controls.email.hasError('email') &&
+              benXeForm.controls.email.touched" class="text-danger">Email phải đúng định dạng
+    </div>
+
+    <div class="col-md-12">
+      <label for="gioDi" class="form-label">Giờ đi<span style="color: red">(*)</span></label>
+      <input type="time" class="form-control" id="gioDi" formControlName="gioDi">
+    </div>
+    <div *ngIf="benXeForm.controls.gioDi.hasError('required') &&
+              benXeForm.controls.gioDi.touched" class="text-danger">Giờ đi không được để trống
+    </div>
+    <div *ngIf="benXeForm.controls.gioDi.hasError('min') &&
+              benXeForm.controls.gioDi.touched" class="text-danger">Giờ đi phải lớn hơn 5h sáng
+    </div>
+    <div *ngIf="benXeForm.controls.gioDi.hasError('max') &&
+              benXeForm.controls.gioDi.touched" class="text-danger">Giờ đi phải nhỏ hơn 23h tối
+    </div>
+
+
+    <div class="col-md-12">
+      <label for="gioDen" class="form-label">Giờ đến<span style="color: red">(*)</span></label>
+      <input type="time" class="form-control" id="gioDen" formControlName="gioDen">
+    </div>
+    <div *ngIf="benXeForm.controls.gioDen.hasError('required') &&
+              benXeForm.controls.gioDen.touched" class="text-danger">Giờ đến không được để trống
+    </div>
+    <div *ngIf="benXeForm.controls.gioDen.hasError('min') &&
+              benXeForm.controls.gioDen.touched" class="text-danger">Giờ đến phải lớn hơn 5h sáng
+    </div>
+    <div *ngIf="benXeForm.controls.gioDen.hasError('max') &&
+              benXeForm.controls.gioDen.touched" class="text-danger">Giờ đến phải nhỏ hơn 23h tối
+    </div>
+    <div class="col-12 ">
+      <button type="submit" class="btn btn-primary me-2">Update</button>
+      <button type="button" class="btn btn-success" routerLink="">Back</button>
+    </div>
+  </form>
+</div>
